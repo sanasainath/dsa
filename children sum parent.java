@@ -139,26 +139,27 @@ class Tree
         if(root==null)
         {
             return 1;
+            
         }
-      if (root.left == null && root.right == null)
-
-       {
-           return 1;
-       }
-     int x=(root.left!=null)?root.left.data:0;
-     int y=(root.right!=null)?root.right.data:0;
-   // Example assuming x and y are integers
-  if (root.data == x + y && isSumProperty(root.left) == 1 && isSumProperty(root.right) == 1)
+        
+    if(root.left==null&&root.right==null)
+    {
+        return 1;
+    }
+    
+        int x=(root.left==null&&root.right!=null)?root.right.data:0;
+        int y=(root.left!=null&&root.right==null)?root.left.data:0;
+        if(root.left!=null&&root.right!=null)
         {
-            return 1;
+            x=root.left.data;
+            y=root.right.data;
         }
-        else
+        int z=x+y;
+        
+        if(z!=root.data)
         {
             return 0;
         }
-
-
-       
-        
+        return (isSumProperty(root.left) == 1 && isSumProperty(root.right) == 1) ? 1 : 0;
     }
 }
