@@ -1,41 +1,20 @@
-import java.util.ArrayList;
-import java.util.HashSet;
-
 class Solution {
     public int removeDuplicates(int[] nums) {
-        HashSet<Integer> h = new HashSet<>();
-        ArrayList<Integer> a = new ArrayList<>();
-
-        for (int i : nums) {
-            if (!h.contains(i)) {
-                h.add(i);
-                a.add(i);
+        int n = nums.length;
+        if (n == 0 || n == 1) {
+            return n; // No duplicates can exist in an array of length 0 or 1
+        }
+        
+        int uniqueIndex = 0; // Index to track the position for the next unique element
+        
+        for (int i = 0; i < n - 1; i++) {
+            if (nums[i] != nums[i + 1]) {
+                nums[uniqueIndex++] = nums[i]; // Move the unique element to the correct position
             }
         }
-
-        for (int i = 0; i < a.size(); i++) {
-            nums[i] = a.get(i);
-        }
-
-        return a.size();
-    }
-}
-  
-//optimized...
-
-
-class Solution {
-    public intremoveDuplicates(int[] nums) {
-      
-      int count=1;
-      for(int i=1;i<nums.length;i++)
-      {
-          if(nums[i]!=nums[i-1])
-          {
-              nums[count]=nums[i];
-              count++;
-          }
-      }
-      return count;
+        
+        nums[uniqueIndex++] = nums[n - 1]; // Copy the last element as it's always unique
+        
+        return uniqueIndex; // Return the length of the modified array
     }
 }
