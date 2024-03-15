@@ -1,0 +1,140 @@
+//{ Driver Code Starts
+/*package whatever //do not write package name here */
+
+import java.io.*;
+import java.util.*;
+
+class Node {
+    int data;
+    Node next;
+    
+    public Node (int data){
+        this.data = data;
+        this.next = null;
+    }
+}
+
+class GFG {
+    static void printList(Node node) 
+	{ 
+		while (node != null) 
+		{ 
+			System.out.print(node.data + " "); 
+			node = node.next; 
+		} 
+		System.out.println(); 
+	}
+	public static void main (String[] args) {
+		Scanner sc  = new Scanner(System.in);
+		int t = sc.nextInt();
+		while(t-- > 0){
+		    int n = sc.nextInt();
+		    
+		    Node head = new Node(sc.nextInt());
+		    Node tail = head;
+		    
+		    for(int i=1; i<n; i++){
+		        tail.next = new Node(sc.nextInt());
+		        tail = tail.next;
+		    }
+		    Solution obj = new Solution();
+		    head = obj.sort(head);
+		    printList(head);
+		}
+	}
+}
+
+// } Driver Code Ends
+
+
+
+/*
+class Node {
+    int data;
+    Node next;
+    
+    public Node (int data){
+        this.data = data;
+        this.next = null;
+    }
+}
+*/
+
+class Solution {
+    
+   public Node sort(Node head){
+        //your code here, return the head of the sorted list
+        Node current=head;
+        Node ascHead=null;
+        Node ascTemp=null;
+        Node desHead=null;
+        Node desTemp=null;
+    
+        while(current!=null)
+        {
+            if(ascHead==null)
+            {
+                ascHead=current;
+                ascTemp=current;
+            }
+            else
+            {
+                ascTemp.next=current;
+                ascTemp=ascTemp.next;
+            }
+            current=current.next;
+            if(current!=null)
+            {
+                if(desHead==null)
+            {
+                desHead=current;
+                desTemp=current;
+            }
+            else
+            {
+                desTemp.next=current;
+                desTemp=desTemp.next;
+            }
+            current=current.next;
+                
+            }
+            
+        }
+        ascTemp.next=null;
+        desTemp.next=null;
+        desHead=reverse(desHead);
+         Node xx=merge(ascHead,desHead);
+         return xx;
+     
+        
+        
+   }
+  Node merge(Node root1,Node root2)
+   
+   {
+       Node root11=root1;
+       while(root11.next!=null)
+       {
+           root11=root11.next;
+       }
+       root11.next=root2;
+       return root1;
+       
+   }
+ Node reverse(Node root)
+   {
+       Node prev=null;
+       Node curr=root;
+       Node next=null;
+       while(curr!=null)
+       {
+           next=curr.next;
+           curr.next=prev;
+           prev=curr;
+           curr=next;
+       }
+       return prev;
+   }
+
+
+}
