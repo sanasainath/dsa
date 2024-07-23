@@ -2,10 +2,10 @@ class Solution {
     public long minimumOperations(int[] nums, int[] target) {
         int decop=0;
         int incop=0;
-        int ans=0;
+        long ans=0;
         for(int i=0;i<nums.length;i++)
         {
-            nums[i]=target[i]-nums[i];
+            nums[i]=nums[i]-target[i];
             if(nums[i]>0)
             {
                 if(incop<nums[i])
