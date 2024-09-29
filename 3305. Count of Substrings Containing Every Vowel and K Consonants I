@@ -1,0 +1,51 @@
+3305. Count of Substrings Containing Every Vowel and K Consonants I
+
+class Solution {
+    public int countOfSubstrings(String word, int k) {
+        
+      int count=0;
+
+        for(int i=0;i<word.length();i++)
+        {
+            for(int j=i;j<word.length();j++)
+            {
+                HashMap<Character,Integer>mapp=new HashMap<>();
+      mapp.put('a',-1);
+      mapp.put('e',-1);
+      mapp.put('i',-1);
+      mapp.put('o',-1);
+      mapp.put('u',-1);
+                String ss=word.substring(i,j+1);
+                int con=0;
+                for(char ch:ss.toCharArray())
+                {
+                    if(mapp.containsKey(ch))
+                    {
+                        mapp.put(ch,1);
+                    }
+                    else
+                    {
+                        con++;
+                        
+                    }
+                    
+                }
+                boolean check=false;
+                for(Integer val:mapp.values())
+                {
+                    if(val==-1)
+                    {
+                        check=true;
+                    }
+                }
+                if(!check&&con==k)
+                {
+                    count++;
+                }
+
+
+            }
+        }
+        return count;
+    }
+}
